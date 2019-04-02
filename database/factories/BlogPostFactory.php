@@ -9,7 +9,8 @@ $factory->define(\App\Models\BlogPost::class, function (Faker $faker) {
     $txt = $faker->realText(rand(1000, 4000));
     $isPublished = rand(1, 5) > 1;
 
-    $data = [
+    $createdAt = $faker->dateTimeBetween('-3 month', '-2 month');
+    return  [
         'category_id'   =>  rand(1, 11),
         'user_id'       =>  (rand(1,5) == 5 ? 1 : 2),
         'title'         =>  $title,
@@ -19,11 +20,8 @@ $factory->define(\App\Models\BlogPost::class, function (Faker $faker) {
         'content_html'  =>  $txt,
         'is_published'  =>  $isPublished,
         'published_at'  =>  $isPublished ? $faker->dateTimeBetween('-2 month', '-1 days') : null,
+        'created_at'  =>   $createdAt,
+        'updated_at'  =>   $createdAt,
     ];
 
-
-    return [
-        //
-        $data,
-    ];
 });
