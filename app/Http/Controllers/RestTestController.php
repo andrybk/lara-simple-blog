@@ -15,7 +15,7 @@ class RestTestController extends Controller
     public function index()
     {
         ///
-        dd(1);
+        dd(3);
         ///
     }
 
@@ -26,7 +26,7 @@ class RestTestController extends Controller
      */
     public function create()
     {
-        //
+        dd(2);
     }
 
     /**
