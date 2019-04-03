@@ -80,7 +80,7 @@ class CategoryController extends BaseController
     public function update(Request $request, $id)
     {
         //
-
+        $id = 111111;
         $item = BlogCategory::find($id);
         if(empty($item)){
             return back()
