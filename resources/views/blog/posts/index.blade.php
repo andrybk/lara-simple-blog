@@ -1,4 +1,6 @@
-<table>
+@extends('layouts.app')
+
+@section('content')<table>
 
     @foreach($items as $item)
         <tr>
@@ -14,3 +16,4 @@
         </tr>
 @endforeach
 </table>
+    @endsection
