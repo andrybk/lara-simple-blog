@@ -51,12 +51,13 @@
                                 @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea name="description"
                                           id="description"
                                           rows="3"
-                                          class="form-control">
+                                          class="form-control">{{old('description', $item->description)}}
                                 </textarea>
                             </div>
                         </div>
