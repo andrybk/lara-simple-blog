@@ -20,9 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::resource('rest', 'RestTestController')->names('restTest');
 
-Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function (){
-    Route::resource('posts', 'PostController')->names('blog.posts');
-});
+//Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function (){
+//    Route::resource('posts', 'PostController')->names('blog.posts');
+//});
 
 
 //> Admin Panel
@@ -37,5 +37,9 @@ Route::group($groupData, function(){
     Route::resource('categories', 'CategoryController')
         ->only($methods)
         ->names('blog.admin.categories');
+
+    Route::resource('posts', 'PostController')
+        ->except(['show'])
+        ->names('blog.admin.posts');
 });
 //< Admin Panel
