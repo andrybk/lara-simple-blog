@@ -43,6 +43,8 @@ class CategoryController extends BaseController
      */
     public function create()
     {
+
+        //  TODO: use pattern for create models elements instead (new)
         $item = new BlogCategory();
         $categoryList = $this->blogCategoryRepository->getForSelect();
 
@@ -61,18 +63,13 @@ class CategoryController extends BaseController
         //
 
         $data = $request->input();
-        //$data = $request->except('_method', '_token');
-        //dd($request->input());
+
+        // TODO: add slug validation for generated
         if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
         }
 
         $item = new BlogCategory($data);
-
-//        $result = $item
-//            ->fill($data)
-//            ->save();
-
         $item->save();
 
         if ($item) {
@@ -133,8 +130,6 @@ class CategoryController extends BaseController
                 ->withInput();
         }
         $data = $request->input();
-        //$data = $request->except('_method', '_token');
-        //dd($request->input());
 
         $result = $item
             ->update($data);

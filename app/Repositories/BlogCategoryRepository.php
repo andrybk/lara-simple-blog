@@ -11,23 +11,22 @@ class BlogCategoryRepository extends CoreRepository
         return $this->startConditions()->find($id);
     }
 
-    public function getForSelect(){
+    public function getForSelect()
+    {
 
-        $columns = implode(', ', ['id','CONCAT (id, ". ", title) AS id_title',]);
+        $columns = implode(', ', ['id', 'CONCAT (id, ". ", title) AS id_title',]);
 
         $result = $this
             ->startConditions()
             ->selectRaw($columns)
-            //->toBase()
-            ->get();
-
-
-
+            ->get()
+            ->toBase();
 
         return $result;
     }
 
-    public function getAllWithPaginate($perPage = null){
+    public function getAllWithPaginate($perPage = null)
+    {
         $columns = implode(', ', ['id', 'title', 'parent_id']);
 
         $result = $this
