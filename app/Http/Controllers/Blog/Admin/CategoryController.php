@@ -80,17 +80,20 @@ class CategoryController extends BaseController
     public function update(Request $request, $id)
     {
         //
-        $id = 111111;
+
         $item = BlogCategory::find($id);
         if(empty($item)){
             return back()
                 ->withErrors(['msg' => "Note id=[{$id}] not found"])
                 ->withInput();
         }
-        $data = $request->except('_method', '_token');
-        //dd($data);
+        $data = $request->input();
+        //$data = $request->except('_method', '_token');
+        //dd($request->input());
 
-        $result = $item->fill($data)->save();
+        $result = $item
+            ->fill($data)
+            ->save();
 
 
         if($result){

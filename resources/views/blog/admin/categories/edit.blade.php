@@ -8,9 +8,10 @@
         @csrf
         <div class="container">
             @php /** @var \Illuminate\Support\ViewErrorBag $errors*/ @endphp
+            @php /** @var Succ $errors*/ @endphp
             @if($errors ->any())
                 <div class="row justify-content-center">
-                    <div class="col-md-10">
+                    <div class="col-md-11">
                         <div class="alert alert-danger">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">x</span>
@@ -21,7 +22,18 @@
                 </div>
 
                 @endif
-
+            @if(session('success'))
+                <div class="row justify-content-center">
+                    <div class="col-md-11">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                            {{session()->get('success')}}
+                        </div>
+                    </div>
+                </div>
+                @endif
 
             <div class="row justify-content-center">
                 <div class="col-md-8">

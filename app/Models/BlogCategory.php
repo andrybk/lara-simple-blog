@@ -8,5 +8,10 @@ class BlogCategory extends Model
 {
     //
 
-    protected $fillable = ['title', 'slug', 'parent_id', 'description'];
+    protected $fillable = [
+        'title',
+        'slug',
+        'parent_id',
+        'description'
+    ];
 }
