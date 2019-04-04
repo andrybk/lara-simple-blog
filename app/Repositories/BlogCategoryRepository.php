@@ -1,21 +1,13 @@
-<?php
-
-namespace App\Repositories;
-
+<?php namespace App\Repositories;
 
 use App\Models\BlogCategory as Model;
 
-/**
- * Class BlogCategoryRepository
- * @package App\Repositories
- */
 class BlogCategoryRepository extends CoreRepository
 {
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getEdit($id){
+
+
+    public function getEdit($id)
+    {
         return $this->startConditions()->find($id);
     }
 
@@ -23,11 +15,11 @@ class BlogCategoryRepository extends CoreRepository
         return $this->startConditions()->all();
     }
 
-    /**
-     * @return string
-     *
-     */
-    protected function getModelClass(){
+    protected function getModelClass()
+    {
         return Model::class;
+        // TODO: Implement getModelClass() method.
     }
+
+
 }

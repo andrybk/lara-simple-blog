@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Requests\BLogCategoryUpdateRequest;
 use App\Models\BlogCategory;
-
 use App\Repositories\BlogCategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,7 +44,7 @@ class CategoryController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(BLogCategoryUpdateRequest $request)
@@ -55,7 +54,7 @@ class CategoryController extends BaseController
         $data = $request->input();
         //$data = $request->except('_method', '_token');
         //dd($request->input());
-        if(empty($data['slug'])){
+        if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
         }
 
@@ -67,11 +66,11 @@ class CategoryController extends BaseController
 
         $item->save();
 
-        if($item){
+        if ($item) {
             return redirect()
                 ->route('blog.admin.categories.edit', $item->id)
-                ->with(['success' => 'Successfully created'] );
-        }else{
+                ->with(['success' => 'Successfully created']);
+        } else {
             return back()
                 ->withErrors(['msg' => "Creation error"])
                 ->withInput();
@@ -81,7 +80,7 @@ class CategoryController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -92,14 +91,15 @@ class CategoryController extends BaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @param  BlogCategoryRepository $categoryRepository
+     * @param int $id
+     * @param BlogCategoryRepository $blogCategoryRepository
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, BlogCategoryRepository $blogCategoryRepository)
+    public function edit($id, BlogCategoryRepository $categoryRepository)
     {
-//        $item = $categoryRepository->getEdit($id);
-//        $categoryList = $categoryRepository->getForComboBox();
+
+        $item = $categoryRepository->getEdit($id);
+        $categoryList = $categoryRepository->getForComboBox();
 
         $item = BlogCategory::find($id);
         $categoryList = BlogCategory::all();
@@ -111,8 +111,8 @@ class CategoryController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(BLogCategoryUpdateRequest $request, $id)
@@ -121,7 +121,7 @@ class CategoryController extends BaseController
 
 
         $item = BlogCategory::find($id);
-        if(empty($item)){
+        if (empty($item)) {
             return back()
                 ->withErrors(['msg' => "Note id=[{$id}] not found"])
                 ->withInput();
@@ -134,11 +134,11 @@ class CategoryController extends BaseController
             ->update($data);
 
 
-        if($result){
+        if ($result) {
             return redirect()
                 ->route('blog.admin.categories.edit', $item->id)
-                ->with(['success' => 'Successfully created'] );
-        }else{
+                ->with(['success' => 'Successfully created']);
+        } else {
             return back()
                 ->withErrors(['msg' => "Creation error"])
                 ->withInput();
@@ -148,7 +148,7 @@ class CategoryController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
