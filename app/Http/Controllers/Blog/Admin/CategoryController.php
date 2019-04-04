@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Requests\BLogCategoryUpdateRequest;
 use App\Models\BlogCategory;
+
+use App\Repositories\BlogCategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -91,12 +93,15 @@ class CategoryController extends BaseController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     * @param  BlogCategoryRepository $categoryRepository
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, BlogCategoryRepository $blogCategoryRepository)
     {
-        //Так делать не надо!!
-        $item = BlogCategory::findOrFail($id);
+//        $item = $categoryRepository->getEdit($id);
+//        $categoryList = $categoryRepository->getForComboBox();
+
+        $item = BlogCategory::find($id);
         $categoryList = BlogCategory::all();
 
         return view('blog.admin.categories.edit',
@@ -126,8 +131,7 @@ class CategoryController extends BaseController
         //dd($request->input());
 
         $result = $item
-            ->fill($data)
-            ->save();
+            ->update($data);
 
 
         if($result){
