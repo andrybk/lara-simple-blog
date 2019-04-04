@@ -9,4 +9,11 @@ use \App\Http\Controllers\Blog\BaseController as GuestController;
 abstract class BaseController extends GuestController
 {
     //
+    /**
+     * BaseController constructor.
+     */
+    public function __construct()
+    {
+
+    }
 }
