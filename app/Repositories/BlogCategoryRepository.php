@@ -32,7 +32,7 @@ class BlogCategoryRepository extends CoreRepository
         $result = $this
             ->startConditions()
             ->selectRaw($columns)
-            ->paginate($perPage);
+            ->paginate(($perPage == null) ? 25 : $perPage);
 
         return $result;
     }
