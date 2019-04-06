@@ -25,8 +25,8 @@
                                 @php /** @var \App\Models\BlogPost $blogPost */@endphp
                                 <tr @if($blogPost->is_published) style="background-color: #cccccc;" @endif>
                                     <td>{{$blogPost->id}}</td>
-                                    <td>{{$blogPost->user_id}}</td>
-                                    <td>{{$blogPost->category_id}}</td>
+                                    <td>{{$blogPost->user->name}}</td>
+                                    <td>{{$blogPost->category->title}}</td>
                                     <td>
                                         <a href="{{route('blog.admin.posts.edit', $blogPost->id)}}">
                                             {{$blogPost->title}}

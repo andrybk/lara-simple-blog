@@ -10,15 +10,13 @@ class BlogPost extends Model
     //
     use SoftDeletes;
 
-    protected $dateFormat = 'U';
-    protected $dates = [
+    public function category(){
+        return $this->belongsTo(BlogCategory::class);
+    }
 
-        'published_at',
-    ];
-
-    protected $casts = [
-        'published_at' => 'd.M H:i',
-    ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
 
 

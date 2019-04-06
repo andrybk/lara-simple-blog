@@ -25,12 +25,14 @@ class BlogPostRepository extends CoreRepository
         $result = $this->startConditions()
             ->select($columns)
             ->orderBy('id', 'DESC')
-            ->toBase()
+            ->with([
+                'category:id,title',
+                'user:id,name',
+
+            ])
             ->paginate(($perPage == null) ? 25 : $perPage);
 
-        $asd = 4;
 
-        $asdd = $asd + '123';
         return $result;
     }
 
