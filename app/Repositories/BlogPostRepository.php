@@ -5,13 +5,13 @@ use App\Models\BlogPost as Model;
 class BlogPostRepository extends CoreRepository
 {
 
-    protected function getModelClass()
+    public function getEdit($id)
     {
-        return Model::class;
-        // TODO: Implement getModelClass() method.
+        return $this->startConditions()->find($id);
     }
 
-    public function getAllWithPaginate($perPage = null){
+    public function getAllWithPaginate($perPage = null)
+    {
         $columns = [
             'id',
             'title',
@@ -34,6 +34,12 @@ class BlogPostRepository extends CoreRepository
 
 
         return $result;
+    }
+
+    protected function getModelClass()
+    {
+        return Model::class;
+        // TODO: Implement getModelClass() method.
     }
 
 }
