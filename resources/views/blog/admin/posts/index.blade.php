@@ -23,7 +23,7 @@
 
                             @foreach($paginator as $blogPost)
                                 @php /** @var \App\Models\BlogPost $blogPost */@endphp
-                                <tr @if($blogPost->is_published) style="background-color: #cccccc;" @endif>
+                                <tr @if(!($blogPost->is_published)) style="background-color: #cccccc;" @endif>
                                     <td>{{$blogPost->id}}</td>
                                     <td>{{$blogPost->user->name}}</td>
                                     <td>{{$blogPost->category->title}}</td>
