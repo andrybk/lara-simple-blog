@@ -27,6 +27,16 @@ class BlogCategoryObserver
     {
         //
     }
+    /**
+     * Handle the models blog category "updated" event.
+     *
+     * @param  \App\ModelsBlogCategory  $modelsBlogCategory
+     * @return void
+     */
+    public function updating(BlogCategory $modelsBlogCategory)
+    {
+        //
+    }
 
     /**
      * Handle the models blog category "deleted" event.

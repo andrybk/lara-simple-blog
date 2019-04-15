@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string         $content_raw
  * @property string         $except
  * @property boolean        $is_published
- * @property string         $published_att
+ * @property string         $published_at
  *
  */
 
