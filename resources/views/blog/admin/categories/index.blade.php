@@ -28,7 +28,7 @@
                                         </a>
                                     </td>
                                     <td @if(in_array($blogCategory->parent_id, [0,1])) style="color: grey" @endif>
-                                        {{$blogCategory->parent_id}} {{--$item->parentCategory->title--}}
+                                        {{$blogCategory->parentTitle}}
                                     </td>
                                 </tr>
                             @endforeach

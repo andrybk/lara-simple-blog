@@ -21,6 +21,7 @@ class BlogPostObserver
 
     public function creating(BlogPost $blogPost)
     {
+        //TODO: сначала нужно сохранить отправить на проверку ошибки там потом только публикация
         $this->setPublishedAt($blogPost);
 
         $this->setSlug($blogPost);

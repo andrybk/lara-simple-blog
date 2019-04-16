@@ -32,6 +32,9 @@ class BlogCategoryRepository extends CoreRepository
         $result = $this
             ->startConditions()
             ->selectRaw($columns)
+            ->with([
+                'parentCategory:id,title'
+            ])
             ->paginate(($perPage == null) ? 25 : $perPage);
 
         return $result;
