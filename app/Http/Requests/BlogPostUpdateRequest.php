@@ -31,4 +31,19 @@ class BlogPostUpdateRequest extends FormRequest
             'category_id' =>  'required|integer|exists:blog_categories,id',
         ];
     }
+
+    public function messages() {
+        return [
+          'title.required' => 'Fill the :attribute field',
+          'content_raw.min' => 'MIn length if the post is [:min] symbols'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+          'title' => 'Title',
+
+        ];
+    }
 }

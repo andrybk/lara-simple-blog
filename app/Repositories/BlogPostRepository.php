@@ -10,6 +10,20 @@ class BlogPostRepository extends CoreRepository
         return $this->startConditions()->find($id);
     }
 
+    public function getForSelect()
+    {
+
+        $columns = implode(', ', ['id', 'CONCAT (id, ". ", title) AS id_title',]);
+
+        $result = $this
+            ->startConditions()
+            ->selectRaw($columns)
+            ->get()
+            ->toBase();
+
+        return $result;
+    }
+
     public function getAllWithPaginate($perPage = null)
     {
         $columns = [

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Http\Requests\BLogCategoryUpdateRequest;
 use App\Http\Requests\BlogPostUpdateRequest;
 use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 
 /**
  * Class PostController
@@ -48,7 +47,13 @@ class PostController extends BaseController
      */
     public function create()
     {
-        //
+        //TODO: так порождать объекты не надо, должен быть отдельный билдер
+        $item = new BlogPost();
+        $categoryList = $this->blogPostRepository->getForSelect();
+
+        return view('blog.admin.posts.create',
+            compact('item', 'categoryList'));
+
     }
 
     /**
@@ -57,9 +62,19 @@ class PostController extends BaseController
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BLogCategoryUpdateRequest $request)
     {
-        //
+        $data = $request->input();
+        $item = (new BlogPost())->create($data);
+
+        if ($item) {
+            return redirect()->route('blog.admin.posts.edit', [$item->id])
+                ->with(['success' => 'Successfully created']);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                        ->withInput();
+        }
+
     }
 
     /**
@@ -105,7 +120,7 @@ class PostController extends BaseController
     {
         $item = $this->blogPostRepository->getEdit($id);
 
-        if(empty($item)){
+        if (empty($item)) {
             return back()
                 ->withErrors(['msg' => "Post id=[{$id}] not found"])
                 ->withInput();
@@ -119,9 +134,7 @@ class PostController extends BaseController
             return redirect()
                 ->route('blog.admin.posts.edit', $item->id)
                 ->with(['success' => 'Successfully saved']);
-        }
-        else
-        {
+        } else {
             return back()
                 ->withErrors(['msg' => 'Save error'])
                 ->withInput();

@@ -19,6 +19,45 @@ class BlogPostObserver
         //
     }
 
+    public function creating(BlogPost $blogPost)
+    {
+        $this->setPublishedAt($blogPost);
+
+        $this->setSlug($blogPost);
+
+        $this->setHtml($blogPost);
+
+        $this->setUser($blogPost);
+    }
+
+    protected function setPublishedAt(BlogPost $blogPost)
+    {
+        if (empty($blogPost->published_at) && $blogPost->is_published) {
+            $blogPost->published_at = Carbon::now();
+        }
+    }
+
+    protected function setSlug(BlogPost $blogPost)
+    {
+        if (empty($blogPost->slug)) {
+            $blogPost->slug = Str::slug($blogPost->title);
+        }
+    }
+
+    protected function setHtml(BlogPost $blogPost)
+    {
+        if ($blogPost->isDirty('content_raw')) {
+            //TODO: add markdown
+            $blogPost->content_html = ($blogPost->content_raw);
+        }
+    }
+
+    protected function setUser(BlogPost $blogPost){
+
+        //TODO: проверки на роли не обойтись
+        $blogPost->user_id = auth()->id() ?? BlogPost::UNKNOWN_USER;
+    }
+
     /**
      * Handle the models blog post "updated" event.
      *
@@ -41,20 +80,6 @@ class BlogPostObserver
         $this->setPublishedAt($blogPost);
 
         $this->setSlug($blogPost);
-    }
-
-    public function setPublishedAt(BlogPost $blogPost)
-    {
-        if (empty($blogPost->published_at) && $blogPost->is_published) {
-            $blogPost->published_at = Carbon::now();
-        }
-    }
-
-    public function setSlug(BlogPost $blogPost)
-    {
-        if (empty($blogPost->slug)) {
-            $blogPost->slug = Str::slug($blogPost->title);
-        }
     }
 
     /**
