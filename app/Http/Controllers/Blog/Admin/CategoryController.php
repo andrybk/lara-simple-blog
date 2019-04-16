@@ -65,9 +65,6 @@ class CategoryController extends BaseController
         $data = $request->input();
 
         // TODO: add slug validation for generated
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
 
         $item = new BlogCategory($data);
         $item->save();
