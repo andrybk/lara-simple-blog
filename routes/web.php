@@ -18,12 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::resource('rest', 'RestTestController')->names('restTest');
-
-//Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function (){
-//    Route::resource('posts', 'PostController')->names('blog.posts');
-//});
-
 
 //> Admin Panel
 $groupData = [
@@ -32,12 +26,12 @@ $groupData = [
 ];
 
 Route::group($groupData, function(){
-    //BlogCategory
+    //Categories
     $methods = ['index', 'edit', 'store', 'update', 'create',];
     Route::resource('categories', 'CategoryController')
         ->only($methods)
         ->names('blog.admin.categories');
-
+    //Posts
     Route::resource('posts', 'PostController')
         ->except(['show'])
         ->names('blog.admin.posts');
