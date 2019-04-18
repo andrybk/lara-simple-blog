@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesUsersTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateRolesUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles_users', function (Blueprint $table) {
-            $table->bigIncrements('role_id')->unsigned();
-            $table->bigIncrements('user_id')->unsigned();
+        Schema::create('role_user', function (Blueprint $table) {
+
+            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
 
             $table->unique(['role_id', 'user_id']);
 
