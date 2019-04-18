@@ -7,12 +7,11 @@ use App\Models\BlogPost;
 use App\Observers\BlogCategoryObserver;
 use App\Observers\BlogPostObserver;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 
-class AppServiceProvider extends ServiceProvider
+class ModelObserverServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -22,12 +21,14 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+
+        BlogPost::observe(BlogPostObserver::class);
+        BlogCategory::observe(BlogCategoryObserver::class);
     }
 }
