@@ -20,13 +20,13 @@ class UsersTableSeeder extends Seeder
             [
             'name'      =>  'Автор не известен',
             'email'     =>  'author_unknown@g.g',
-            'password'  =>  bcrypt(Str::random(16)),
+            'password'  =>  bcrypt('password'),
 
         ],
         [
             'name'      =>  'Автор',
             'email'     =>  'author@g.g',
-            'password'  =>  bcrypt(123123),
+            'password'  =>  bcrypt('password'),
         ],
         ];
         DB::table('users')->insert($data);
