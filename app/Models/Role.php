@@ -6,7 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    //
+    const ROLE_ADMIN = 'admin';
+    const ROLE_EDITOR = 'editor';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
 
     public function users(){
         return $this->belongsToMany('App\Models\User', 'role_user', 'role_id', 'user_id');
