@@ -151,27 +151,16 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        //TODO:SoftDelete
-        $item = BlogPost::find($id);
-        if (empty($item)) {
-            return back()
-                ->withErrors(['msg' => "Post id=[{$id}] not found"])
-                ->withInput();
-        }
-        $claim_remove_result = $item
-            ->delete();
-        foreach ($item->uploads as $upload) {
-            $upload
-                ->delete();
-        }
-        if ($claim_remove_result) {
+        $result = BlogPost::destroy($id);
+
+        if ($result) {
             return redirect()
-                ->route('blog.admin.posts.index', $item->id)
+                ->route('blog.admin.posts.index')
                 ->with(['success' => 'Successfully deleted']);
         } else {
             return back()
-                ->withErrors(['msg' => "Deletion error"])
-                ->withInput();
+                ->withErrors(['msg' => "Deletion error"]);
+
         }
 
     }
